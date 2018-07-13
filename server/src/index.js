@@ -14,7 +14,7 @@ app.use(cookieParser());
 app.use(compression());
 require('./shared/database'); // database make connection
 // set public path for client side
-app.use(express.static(path.join(__dirname, '../client_dist')));
+app.use(express.static(path.join(__dirname, '../../client//build')));
 
 require('./shared/passport');	// setup for passport
 require('./components/root.routes')(app);	// setup all routes

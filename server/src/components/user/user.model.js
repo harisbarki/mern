@@ -10,11 +10,6 @@ const ROLES = require('../../shared/constants');
 // User Schema
 //= ===============================
 const UserSchema = new Schema({
-		uuid: {
-			type: String,
-			unique: true,
-			required: true
-		},
 		email: {
 			type: String,
 			lowercase: true,
@@ -25,11 +20,6 @@ const UserSchema = new Schema({
 		},
 		profile: {
 			name: { type: String },
-		},
-		orcid: {
-			_id: { type: String },
-			access_token: { type: String },
-			refresh_token: { type: String }
 		},
 		role: {
 			type: String,

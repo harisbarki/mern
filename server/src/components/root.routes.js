@@ -9,7 +9,7 @@ let authRoutes = require('./user/authentication.routes');
 let seedRoutes = require('./seed/seed.routes');
 let contactUsRoutes = require('./contact-us/contact-us.routes');
 
-let CLIENT_DIST_PATH = 'client_dist/index.html';
+let CLIENT_DIST_PATH = '../client/build/index.html';
 
 module.exports = function(app) {
 	let apiRoutes = express.Router();

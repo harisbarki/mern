@@ -48,57 +48,6 @@ router.post('/login', requireLogin, (req, res, next) => {
 	});
 });
 
-
-router.post('/orcid', (req, res, next) => {
-	const formData = {
-		client_id: config.security.orcid.client_id,
-		client_secret: config.security.orcid.client_secret,
-		grant_type: config.security.orcid.grant_type,
-		code: req.body.code,
-		response_type: config.security.orcid.response_type,
-		redirect_uri: req.redirect_uri
-	};
-
-	request.post({url: config.security.orcid.url, form: formData}, function (err, httpResponse, body) {
-		if (err) console.error(err);
-
-		const response = JSON.parse(body);
-
-		User.findOne({'orcid._id': response.orcid}, (err, user) => {
-			if (err) {
-				return next(err);
-			}
-
-			if(!user) {
-				//create user
-				user = new User({
-					uuid: response.orcid,
-					orcid: {
-						_id: response.orcid,
-					}
-				});
-			}
-
-			user.profile.name  = response.name;
-			user.orcid.access_token  = response.access_token;
-			user.orcid.refresh_token = response.refresh_token;
-
-			user.save((err, user) => {
-				if (err) {
-					return next(err);
-				}
-
-				const userInfo = setUserInfo(user);
-				res.status(200).json({
-					token: `JWT ${generateToken(userInfo)}`,
-					expiresIn: response.expires_in,
-					user: userInfo
-				});
-			});
-		});
-	})
-});
-
 //= =======================================
 // Registration Route
 //= =======================================

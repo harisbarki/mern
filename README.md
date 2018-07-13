@@ -2,7 +2,7 @@
 
 ### MongoDB with Mongoose
 ### Express
-### Angular 6
+### React
 ### NodeJS
 
 ## Start
