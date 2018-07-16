@@ -99,7 +99,7 @@ router.post('/register', (req, res, next) => {
 
 			res.status(201).json({
 				token: `JWT ${generateToken(userInfo)}`,
-				expiresIn: config.security.expiresIn,
+				expiresIn: config.security.tokenExpiry,
 				user: userInfo
 			});
 		});
